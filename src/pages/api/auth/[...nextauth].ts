@@ -1,3 +1,8 @@
+/**
+ * @author Sebastian Pavel
+ * ? Next-auth handler
+ */
+
 import NextAuth, { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from "next-auth/providers/credentials";
 import { getOne } from '../../../helpers/prismaFunctions/users';

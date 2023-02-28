@@ -1,3 +1,8 @@
+/**
+ * @author Sebastian Pavel
+ * ? Confirmation update function
+ */
+
 import defaultHandler from "../../../helpers/apiHandlers/defaultHandler";
 import prisma from "../../../helpers/prismaFunctions/prisma";
 import { errLogger } from "../../../utils/logger";
@@ -17,13 +22,14 @@ export default defaultHandler.post(async (req, res) => {
             }
         })
         infoLogger.info(`${user.email} was successfully verified!`)
+        res.status(200).send({
+            message: `${user.email} verified successfully!`,
+            confirmed: user.verified
+        })
     } catch (err) {
-        errLogger.error(`Got an error updating the user. || ${user.email}`)
-        throw new Error(err)
+        errLogger.error(`Got an error updating the user. || ${user.email} || error: ${err}`)
+        res.status(500).send({
+            message: `Got an error updating the user! || ${err}`
+        })
     }
-
-    res.status(200).send({
-        message: `${user.email} verified successfully!`,
-        confirmed: user.verified
-    })
 })

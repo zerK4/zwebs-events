@@ -1,9 +1,16 @@
+/**
+ * @author Sebastian Pavel
+ * ? Login page
+ */
+
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {useAuthStore} from '../../store/authStore'
 import notValidated from '../../Components/notValidated'
 import { useRouter } from 'next/router'
 import { NextPageContext } from 'next'
+import Head from 'next/head'
+import Link from 'next/link'
 
 export const Login = () => {
 const [email, setEmail] = useState('')
@@ -17,7 +24,7 @@ const router = useRouter();
 
 const login = async (e: any) => {
 e.preventDefault();
-if(email&& password){
+if(email && password){
     try {
         const { data } = await axios({
             method: "POST",
@@ -72,24 +79,30 @@ if(email&& password){
  }
  const renderForm = () => {
     return (
-        <div className='p-24'>  
+        <div className='p-10 m:p-24 bg-neutral-900 min-h-screen flex flex-col items-center justify-center'> 
+        <Head>
+            <title>Login</title>
+        </Head> 
+        <div className='p-10 bg-neutral-800 w-full md:w-1/2'>
         {
             message ? <p id='message' className={`mb-10 ${status === "nok" ? 'text-red-500' : "text-green-400"}`}>{message}</p> : null
         }
         <form>
-            <div className="mb-6">
-                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="***" required/>
-            </div>
-            <div className="mb-6">
-                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 ">Your password</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="***"/>
-            </div>
-            <div className='flex items-center gap-4'>
-                <button onClick={(e) => login(e)} type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit</button>
-                <button onClick={(e) => forgotPassword(e)} className='text-neutral-400 rounded-md hover:text-red-400'>Forgot password?</button>
+        <div className="relative z-0 w-full mb-6 group">
+            <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+            <label htmlFor="floating_email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email</label>
+        </div>
+        <div className="relative z-0 w-full mb-6 group">
+            <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" name="floating_password" id="floating_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+            <label htmlFor="floating_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+        </div>
+        <div className='flex items-center gap-4'>
+            <button onClick={(e) => login(e)} type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit</button>
+            <button onClick={(e) => forgotPassword(e)} className='text-neutral-400 hover:text-red-400'>Forgot password?</button>
+            <Link href={'/auth/register'}><button className='text-neutral-400 hover:text-lime-400'>Register</button></Link>
             </div>
         </form>
+        </div>
         </div>
     )
  }

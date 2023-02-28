@@ -1,7 +1,12 @@
+/**
+ * @author Sebastian Pavel
+ * ? Prisma users handler
+ */
+
 import prisma from "./prisma";
 import { errLogger, infoLogger } from "../../utils/logger";
 
-export const createUser = async (username, email, password, token) => {
+export const createUser = async (username, email, password, token, role) => {
     try {
         const user = await prisma.user.create({
             data: {
@@ -9,11 +14,12 @@ export const createUser = async (username, email, password, token) => {
                 username: username,
                 token: password,
                 verified: false,
-                confirmationToken: token
+                confirmationToken: token,
+                role: role,
             }
         })
         infoLogger.info(`User email: ${email}, username: ${username} created successfully.`)
-        user.token = ""
+        delete user.token
         return user;
     } catch(err) {
         errLogger.error(`Got an error creating an user, ${err}`)

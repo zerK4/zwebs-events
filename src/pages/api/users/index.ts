@@ -1,3 +1,8 @@
+/**
+ * @author Sebastian Pavel
+ * ? Default users function
+ */
+
 import defaultHandler from '../../../helpers/apiHandlers/defaultHandler'
 import { getAll } from '../../../helpers/prismaFunctions/users'
 import auth from '../../../helpers/apiHandlers/auth'

@@ -1,3 +1,8 @@
+/**
+ * @author Sebastian Pavel
+ * ? Confirmation page
+ */
+
 import { NextPageContext } from "next";
 import { useEffect, useState } from 'react'
 import axios from "axios";

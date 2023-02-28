@@ -1,3 +1,8 @@
+/**
+ * @author Sebastian Pavel
+ * ? login backend function
+ */
+
 import defaultHandler from "../../../../helpers/apiHandlers/defaultHandler";
 import { getOne } from "../../../../helpers/prismaFunctions/users";
 import { compare } from "bcrypt";
@@ -14,7 +19,17 @@ export default defaultHandler.post(async (req, res) => {
         compare(password, user!.token, (err, result) => {
             delete user.token
             if (result && !err) {
-                sign(user, key!, (err: any, token: any) => {
+                sign({
+                    email: user.email,
+                    username: user.username,
+                    verified: user.verified,
+                    token: user.confirmationToken,
+                    role: user.role,
+                    profile: {
+                        firstname: user?.profile?.firstName,
+                        lastname: user?.profile?.lastName
+                    }
+                }, key!, (err: any, token: any) => {
                     if (err && !token) {
                         errLogger.error(`Got an error on creating the jwt token, ${err}, email: ${email}`)
                         res.status(500).send({

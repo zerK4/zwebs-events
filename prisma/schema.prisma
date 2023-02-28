@@ -19,6 +19,7 @@ model User {
   username          String
   token             String
   verified          Boolean
+  role              String
   confirmationToken String?  @unique
   profile           Profile?
 }

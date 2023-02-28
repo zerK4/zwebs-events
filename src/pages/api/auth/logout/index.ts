@@ -1,7 +1,6 @@
 /**
  * ? Logout function.
  * @author "Sebastian Pavel"
- * @date January 2023
  */
 
 import defaultHandler from "../../../../helpers/apiHandlers/defaultHandler";

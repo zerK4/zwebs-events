@@ -1,3 +1,8 @@
+/**
+ * @author Sebastian Pavel
+ * ? Email validation function
+ */
+
 import defaultHandler from "../../../../helpers/apiHandlers/defaultHandler";
 import { verifyEmail } from "../../../../helpers/emailServer/email";
 import prisma from "../../../../helpers/prismaFunctions/prisma";

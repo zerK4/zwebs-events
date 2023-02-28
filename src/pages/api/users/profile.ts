@@ -1,3 +1,8 @@
+/**
+ * @author Sebastian Pavel
+ * ? Profile handler function
+ */
+
 import defaultHandler from "../../../helpers/apiHandlers/defaultHandler"
 import { createProfile } from '../../../helpers/prismaFunctions/profile'
 import { getOne } from "../../../helpers/prismaFunctions/users"

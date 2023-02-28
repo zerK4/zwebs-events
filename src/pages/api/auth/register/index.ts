@@ -1,8 +1,14 @@
+/**
+ * @author Sebastian Pavel
+ * ? Registration function
+ */
+
 import defaultHandler from '../../../../helpers/apiHandlers/defaultHandler'
 import { hash } from 'bcrypt'
-import { createUser } from '../../../../helpers/prismaFunctions/users'
+import { createUser, getOne } from '../../../../helpers/prismaFunctions/users'
 import { verifyEmail } from '../../../../helpers/emailServer/email'
 import { errLogger } from '../../../../utils/logger'
+import { uuid } from 'uuidv4'
 
 const salts = 10
 const url = process.env.URL || 'http://localhost:3000/'
@@ -10,14 +16,19 @@ const url = process.env.URL || 'http://localhost:3000/'
 export default defaultHandler.post(async (req, res) => {
     const { password, username, email } = await req.body
     let confirmationToken: string;
-
-    if (email && password && username) {
-        hash(email, 1, async (err, hash) => {
-            confirmationToken = hash
+    const user = await getOne(email)
+    if (user) {
+        res.status(401).send({
+            message: `This email is already registered!`
         })
+    }
+    if (email && password && username) {
+        confirmationToken = uuid()
+        console.log(confirmationToken, 'confirmation token');
+        const role = "default"
 
         hash(password, salts, async (err, hash) => {
-            const user = await createUser(username, email, hash, confirmationToken)
+            const user = await createUser(username, email, hash, confirmationToken, role)
             if (err) {
                 errLogger.error(`Something broke at hashing password, message: ${err}`)
                 res.status(500).send({
@@ -25,7 +36,8 @@ export default defaultHandler.post(async (req, res) => {
                 })
             }
             res.status(200).send({
-                user: user
+                user: user,
+                message: `We have sent a confirmation email to ${email}!`
             })
             verifyEmail({
                 userEmail: email,

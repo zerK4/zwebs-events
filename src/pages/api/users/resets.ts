@@ -1,3 +1,8 @@
+/**
+ * @author Sebastian Pavel
+ * ? Default resets functions
+ */
+
 import defaultHandler from "../../../helpers/apiHandlers/defaultHandler";
 import { verifyEmail } from "../../../helpers/emailServer/email";
 import prisma from "../../../helpers/prismaFunctions/prisma";

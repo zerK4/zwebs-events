@@ -1,3 +1,8 @@
+/**
+ * @author Sebastian Pavel
+ * ? Prisma profile handler
+ */
+
 import prisma from "./prisma";
 import { errLogger, infoLogger } from "../../utils/logger";
 

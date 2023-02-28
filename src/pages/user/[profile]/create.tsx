@@ -1,3 +1,8 @@
+/**
+ * @author Sebastian Pavel
+ * ? Create profile page
+ */
+
 import axios from 'axios';
 import { NextPageContext } from 'next';
 import Head from 'next/head';
@@ -89,6 +94,7 @@ export async  function getServerSideProps(ctx: NextPageContext){
             profile: true
         }
     })
+    delete user.token;
     if (user.profile) {
         redirect(302, {
             Location: "/"

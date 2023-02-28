@@ -1,3 +1,8 @@
+/**
+ * @author Sebastian Pavel
+ * ? email server
+ */
+
 import { render } from '@react-email/render';
 import nodemailer from 'nodemailer';
 import Email from './templates/confirmation'
