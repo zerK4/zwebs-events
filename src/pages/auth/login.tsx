@@ -6,7 +6,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {useAuthStore} from '../../store/authStore'
-import notValidated from '../../Components/notValidated'
+import NotValidated from '../../Components/notValidated'
 import { useRouter } from 'next/router'
 import { NextPageContext } from 'next'
 import Head from 'next/head'
@@ -110,7 +110,7 @@ if(email && password){
  if(validated) {
     return renderForm()
  } else {
-    return notValidated('Account not validated yet!', email, setValidated)
+    return NotValidated('Account not validated yet!', email, setValidated)
  }
 }
 
