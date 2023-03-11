@@ -14,7 +14,7 @@ export const RegisterLoginComponent = () => {
                 <Link href={`/auth/register`}><button className="p-2 w-full bg-[#3A5F8F] ease-in-out duration-300 hover:translate-x-2 shadow-md shadow-black flex items-center gap-2 justify-center"><BsFillCalendarEventFill /> I want an account to create events</button></Link>
                 <Link href={`/auth/register`}><button className="p-2 w-full bg-[#3A5F8F] ease-in-out duration-300 hover:translate-x-2 shadow-md shadow-black flex items-center gap-2 justify-center"><BsFillPersonFill />I want an account as guest to an event</button></Link>
                 <Link href={`/auth/register`}><button className="p-2 w-full bg-[#3A5F8F] ease-in-out duration-300 hover:translate-x-2 shadow-md shadow-black flex items-center gap-2 justify-center"><BsFillCheckCircleFill />I want an account as provider</button></Link>
-                <Link href={`/auth/register`}><button className="p-2 w-full bg-[#3A5F8F] ease-in-out duration-300 hover:translate-x-2 shadow-md shadow-black flex items-center gap-2 justify-center"><FiLogIn />Log me in</button></Link>
+                <Link href={`/auth/login`}><button className="p-2 w-full bg-[#3A5F8F] ease-in-out duration-300 hover:translate-x-2 shadow-md shadow-black flex items-center gap-2 justify-center"><FiLogIn />Log me in</button></Link>
             </div>
         </div>
     )

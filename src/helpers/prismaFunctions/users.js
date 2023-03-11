@@ -7,7 +7,7 @@
 import prisma from "./prisma";
 import { errLogger, infoLogger } from "../../utils/logger";
 
-export const createUser = async (username, email, password, token, role, eventCode) => {
+export const createUser = async (username, email, password, token, role) => {
     try {
         const user = await prisma.user.create({
             data: {
@@ -16,8 +16,7 @@ export const createUser = async (username, email, password, token, role, eventCo
                 token: password,
                 verified: false,
                 confirmationToken: token,
-                role: role,
-                eventCode: eventCode
+                role: role
             }
         })
         infoLogger.info(`User email: ${email}, username: ${username} created successfully.`)

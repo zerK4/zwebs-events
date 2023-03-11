@@ -6,23 +6,25 @@
 import axios from 'axios';
 import { NextPageContext } from 'next';
 import Head from 'next/head';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import prisma from '../../../helpers/prismaFunctions/prisma';
 import { useAuthStore } from '../../../store/authStore';
+import { useRouter } from 'next/router';
 
 const CreateProfile = (props: any) => {
-    const { user: userState } = props
-    const {addUser, userProfile} = useAuthStore()
-    const [fname, setFName] = useState("")
-    const [lname, setLName] = useState("")
-    const [age, setAge] = useState("")
-    const [status, setStatus] = useState(false)
-    const [errore, setErrore] = useState(false)
-    const [loading, setLoading] = useState(false)
-    const [message, setMessage] = useState('')
+    const router = useRouter();
+    const { user: userState } = props;
+    const {addUser, userProfile} = useAuthStore();
+    const [fname, setFName] = useState("");
+    const [lname, setLName] = useState("");
+    const [age, setAge] = useState("");
+    const [status, setStatus] = useState(false);
+    const [errore, setErrore] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState('');
 
     const createProfile = async (e: any) => {
-        e.preventDefault()
+        e.preventDefault();
         setLoading(true)
         try {
             const { data } = await axios({
@@ -40,7 +42,10 @@ const CreateProfile = (props: any) => {
             setLoading(false)
             const newUser = userState
             newUser.profile = data.profile
-            addUser(newUser)
+            addUser(newUser);
+            setTimeout(() => {
+                router.push('/')
+            }, 3000)
         } catch (err) {
             setLoading(false)
             setErrore(true)
@@ -52,7 +57,7 @@ const CreateProfile = (props: any) => {
     return (
         <div className="flex items-center justify-center min-h-screen w-screen bg-neutral-900 px-10">
             <Head>
-                <title>Hi {userState?.username}, let's create you a profile!</title>
+                <title>Hi {userState?.username}, let&apos;s create you a profile!</title>
             </Head>
             <div className='p-10 bg-neutral-800 w-full md:w-1/2'>
                 {

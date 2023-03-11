@@ -10,7 +10,6 @@ import React, {useState, useEffect} from 'react'
 import {AiOutlineInfoCircle} from 'react-icons/ai'
 
 const Register = () => {
-    const [eventCode, setEventCode] = useState("")
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -29,7 +28,6 @@ const Register = () => {
                     method: "POST",
                     url: "/api/auth/register",
                     data: {
-                        eventCode: eventCode,
                         username: username,
                         email: email,
                         password: password
@@ -51,21 +49,13 @@ const Register = () => {
     return (
         <div className="flex items-center justify-center min-h-screen w-screen bg-neutral-900 px-10">
             <Head>
-                <title>Hi, let's register you!</title>
+                <title>Hi, let&apos;s register you!</title>
             </Head>
             <div className='p-10 bg-neutral-800 w-full md:w-1/2'>
                 {
                     status === 'ok' || 'nok' ? <div className={`${status === "ok" ? 'text-lime-400' : 'text-red-500'} mb-10`}>{message}</div> : null
                 }
                 <form className=''>
-                <div className="relative z-0 w-full mb-6 group">
-                    <input value={eventCode} onChange={(e) => setEventCode(e.target.value)} type="text" name="floating_username" id="floating_username" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                    <label htmlFor="floating_username" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Event code</label>
-                    <div onMouseOver={() => setInfoStatus(true)} onMouseOut={() => setInfoStatus(false)} className='absolute right-0 top-1/3'>
-                        <AiOutlineInfoCircle />
-                        <span className={`${infoStatus ? 'flex' : 'hidden'} absolute right-4 -top-3 w-[10rem] text-sm`}>Code provided on the invite.</span>
-                    </div>
-                </div>
                 <div className="relative z-0 w-full mb-6 group">
                     <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" name="floating_username" id="floating_username" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                     <label htmlFor="floating_username" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Username</label>

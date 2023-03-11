@@ -5,6 +5,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import React, {useState, useEffect} from 'react'
+import { MainPageConnected } from '../Components/MainPageConnected/MainPageConnected.component';
 import RegisterLoginComponent from '../Components/RegisterLoginProposal/RegisterLogin.component';
 import { useAuthStore } from '../store/authStore';
 
@@ -53,7 +54,7 @@ return (
       ) : null
   }
 {
-  !connected ? <RegisterLoginComponent /> : <button onClick={() => {logout(), setConnected(false)}} className='p-4 bg-neutral-800 rounded-md m-4 text-white'>Logout</button>
+  !connected ? <RegisterLoginComponent /> : <MainPageConnected logout={logout} setConnected={setConnected} />
 }
 
 </div>
@@ -73,5 +74,3 @@ export async function getServerSideProps(ctx: any) {
     }
   }
 }
-
-{/* <Link href="/auth/login"><button className='p-4 bg-neutral-800 rounded-md m-4 text-white'>Login</button></Link> */}
