@@ -9,7 +9,7 @@ const validateAccount = async () => {
     try {
         const data = await axios({
             method: "POST",
-            url: `http://localhost:3000/api/auth/register/${email}/`,
+            url: `/api/auth/register/${email}/`,
             data: {
                 email: email
             }

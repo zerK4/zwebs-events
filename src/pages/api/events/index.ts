@@ -42,7 +42,7 @@ export default auth(defaultHandler.get(async (req, res) => {
     })
     confirmEventCreation({
         userEmail: eventManager.email,
-        url: `http://localhost:3000/`,
+        url: `${process.env.URL}`,
         subject: `Event created successfully!`,
         message: `Hello ${eventManager.profile.firstName}, your event was successfully created and configured for you. If you want to check it smash the button!`
     })

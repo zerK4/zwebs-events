@@ -29,7 +29,7 @@ export default defaultHandler.post(async (req, res) => {
             userEmail: eventManager.email,
             firstname: eventManager.profile.firstName,
             guest: guest,
-            url: `http://localhost:3000/`,
+            url: `${process.env.URL}`,
             subject: `Guest created successfully!`,
             message: `Hello ${eventManager.profile.firstName}, You have a new guest which joined your event!`
         }

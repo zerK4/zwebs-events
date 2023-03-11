@@ -31,7 +31,7 @@ if(email && password){
             headers: {
             "Content-type": "application/json"
             },
-            url: "http://localhost:3000/api/auth/login",
+            url: "/api/auth/login",
             data: {
             email: email,
             password: password
