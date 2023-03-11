@@ -1,6 +1,6 @@
 // * @author: Sebastian Pavel
 // * created: February 2023
-// * project: Full
+// * project: Zwebs-events
 
 generator client {
   provider = "prisma-client-js"
@@ -36,12 +36,12 @@ model Profile {
 }
 
 model Event {
-  id            Int      @id @default(autoincrement())
-  eventCode     String
+  id            Int    @id @default(autoincrement())
+  eventCode     String @unique
   eventName     String
-  eventDate     DateTime
+  eventDate     String
   eventLocation String
-  eventManager  User?    @relation(fields: [userId], references: [id])
+  eventManager  User?  @relation(fields: [userId], references: [id])
   userId        Int?
 }
 

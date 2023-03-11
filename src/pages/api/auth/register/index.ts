@@ -1,11 +1,13 @@
 /**
  * @author Sebastian Pavel
+ * @date February 2023
  * ? Registration function
  */
 
 import defaultHandler from '../../../../helpers/apiHandlers/defaultHandler'
 import { hash } from 'bcrypt'
 import { createUser, getOne } from '../../../../helpers/prismaFunctions/users'
+import { getEvent } from '../../../../helpers/prismaFunctions/event'
 import { verifyEmail } from '../../../../helpers/emailServer/email'
 import { errLogger } from '../../../../utils/logger'
 import { uuid } from 'uuidv4'
@@ -14,21 +16,27 @@ const salts = 10
 const url = process.env.URL || 'http://localhost:3000/'
 
 export default defaultHandler.post(async (req, res) => {
-    const { password, username, email } = await req.body
+    const { eventCode, password, username, email } = await req.body
     let confirmationToken: string;
+    const event = await getEvent(eventCode)
     const user = await getOne(email)
     if (user) {
         res.status(401).send({
             message: `This email is already registered!`
         })
     }
-    if (email && password && username) {
+    if (!event) {
+        res.status(404).send({
+            message: "Event was not found!"
+        })
+    }
+
+    if (email && password && username && event) {
         confirmationToken = uuid()
-        console.log(confirmationToken, 'confirmation token');
         const role = "default"
 
         hash(password, salts, async (err, hash) => {
-            const user = await createUser(username, email, hash, confirmationToken, role)
+            const user = await createUser(username, email, hash, confirmationToken, role, eventCode)
             if (err) {
                 errLogger.error(`Something broke at hashing password, message: ${err}`)
                 res.status(500).send({

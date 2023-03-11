@@ -55,6 +55,7 @@
     "bcrypt": "^5.1.0",
     "postcss": "^8.4.21",
     "prisma": "^4.10.1",
+    "react-icons": "^4.7.1",
     "tailwindcss": "^3.2.6"
   }
 }
