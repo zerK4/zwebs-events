@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 const url = process.env.URL
 
-const notValidated = (message: string, email: string, setValidated) => {
+const NotValidated = (message: string, email: string, setValidated) => {
 const router = useRouter()
 const validateAccount = async () => {
     try {
@@ -34,4 +34,4 @@ return (
 )
 }
 
-export default notValidated;
+export default NotValidated;
