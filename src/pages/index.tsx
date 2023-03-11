@@ -32,7 +32,6 @@ useEffect(() => {
   setUser(userProfile)
 }, [userProfile])
 
-console.log(user, 'got user here');
 
 const logout = async () => {
   removeUser()
@@ -40,7 +39,6 @@ const logout = async () => {
     method: "GET",
     url: '/api/auth/logout'
   })
-  console.log(data);
 }
 
 return (
@@ -65,8 +63,6 @@ export default Home;
 
 export async function getServerSideProps(ctx: any) {
   const {req: { headers: {cookie} }} = ctx
-  console.log(ctx.req.headers.cookie);
-  
 
   return {
     props: {

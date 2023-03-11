@@ -45,7 +45,6 @@ const CreateEvent = () => {
                 setStatus('nok')
                 setMessage(err.response.data.message)
                 console.log(err);
-                
             }
         }
     }

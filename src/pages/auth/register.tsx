@@ -35,7 +35,6 @@ const Register = () => {
                 })
                 setStatus('ok')
                 setMessage(data.message)
-                console.log(data);
                 setLoading(false)
             } catch (err) {
                 setStatus('nok')

@@ -6,6 +6,7 @@ export const MainPageConnected = ({ logout, setConnected }) => {
         <div>
             <button onClick={() => {logout(), setConnected(false)}} className='p-4 bg-neutral-800 rounded-md m-4 text-white'>Logout</button>
             <Link href="/events/create"><button className='p-4 bg-neutral-800 rounded-md m-4 text-white'>Create event</button></Link>
+            <Link href="/events/checkGuests"><button className='p-4 bg-neutral-800 rounded-md m-4 text-white'>Search guests</button></Link>
         </div>
     )
 }

@@ -8,8 +8,6 @@ import { useEffect, useState } from 'react'
 import axios from "axios";
 
 const Confirmation = (props: any) => {
-    console.log(props.data, 'hitting data response');
-    
     return (
         <div>Confirmation here</div>
     )

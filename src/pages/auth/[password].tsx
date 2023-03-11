@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import prisma from "../../helpers/prismaFunctions/prisma";
 import Head from "next/head";
 
-const resetPassword = (props) => {
+const ResetPassword = (props) => {
     const { user: { email } } = props
     const [password, setPassword] = useState("")
     const [repeat, setRepeat] = useState("")
@@ -30,7 +30,6 @@ const resetPassword = (props) => {
                 }
             })
             setMessage(data.message)
-            console.log(data);
             setTimeout(() => {
                 router.push('/auth/login')
             }, 5000)
@@ -67,7 +66,7 @@ const resetPassword = (props) => {
     
 }
 
-export default resetPassword;
+export default ResetPassword;
 
 export async function getServerSideProps(ctx: NextPageContext) {
     const { password } = ctx.query

@@ -36,26 +36,29 @@ model Profile {
 }
 
 model Event {
-  id            Int    @id @default(autoincrement())
-  eventCode     String @unique
+  id            Int     @id @default(autoincrement())
+  eventCode     String  @unique
   eventName     String
   eventDate     String
   eventLocation String
-  eventManager  User?  @relation(fields: [userId], references: [id])
+  eventManager  User?   @relation(fields: [userId], references: [id])
   userId        Int?
+  eventGuests   Guest[]
 }
 
 model Guest {
-  id            Int     @id @default(autoincrement())
-  participateTo String
-  firstName     String
-  lastName      String
-  email         String
-  phoneNumber   String
-  location      String
-  vegan         Boolean
-  accomodation  Boolean
-  kids          Boolean
+  id           Int     @id @default(autoincrement())
+  token        String  @unique
+  firstName    String
+  lastName     String
+  email        String  @unique
+  phoneNumber  String
+  location     String
+  vegan        Boolean
+  accomodation Boolean
+  kids         Boolean
+  Event        Event   @relation(fields: [eventId], references: [eventCode])
+  eventId      String
 }
 
 model Kid {

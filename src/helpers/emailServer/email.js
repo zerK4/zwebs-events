@@ -9,6 +9,8 @@ import nodemailer from 'nodemailer';
 import { errLogger, infoLogger } from '../../utils/logger';
 import Email from './templates/confirmation'
 import EventCreationConfirmation from './templates/eventCreationConfirmation'
+import ConfirmGuest from './templates/confirmGuest'
+import GuestEmailConfirmation from './templates/guestEmailConfirmation';
 
 
 const email = process.env.EMAIL
@@ -53,5 +55,39 @@ export const confirmEventCreation = async ({ userEmail, url, subject, message })
   } catch (err) {
     console.error(err)
     errLogger.error(`Could not send event confirmation email to ${userEmail}!`)
+  }
+}
+
+export const confirmGuestCreation = async (document) => {
+  const { userEmail, firstname, url, subject, message, guest } = document
+  const emailHtml = render(<ConfirmGuest firstname={firstname} url={url} subject={subject} message={message} guest={guest} />)
+  try {
+    transporter.sendMail({
+      from: 'zWebsEvents<info@zwebs-events.com>',
+      to: userEmail,
+      subject: subject,
+      html: emailHtml
+    })
+    infoLogger.info(`Guest confirmation email sent to ${userEmail}!`)
+  } catch (err) {
+    console.error(err)
+    errLogger.error(`Could not send guest confirmation email to ${userEmail}!`)
+  }
+}
+
+export const confirmGuestEmail = async (document) => {
+  const { userEmail, firstname, url, subject, message } = document
+  const emailHtml = render(<GuestEmailConfirmation firstname={firstname} url={url} subject={subject} message={message} />)
+  try {
+    transporter.sendMail({
+      from: 'zWebsEvents<info@zwebs-events.com>',
+      to: userEmail,
+      subject: subject,
+      html: emailHtml
+    })
+    infoLogger.info(`Guest confirmation email sent to ${userEmail}!`)
+  } catch (err) {
+    console.error(err)
+    errLogger.error(`Could not send guest confirmation email to ${userEmail}!`)
   }
 }

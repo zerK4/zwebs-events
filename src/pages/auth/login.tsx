@@ -40,7 +40,6 @@ if(email && password){
         addUser(data.user)
         setMessage(data.message)
         setStatus('ok')
-        console.log(data);
         setTimeout(() => {
             router.push('/')
         }, 5000)

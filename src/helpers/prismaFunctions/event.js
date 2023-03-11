@@ -14,10 +14,10 @@ export const getEvent = async (eventCode) => {
                 eventCode: eventCode
             }
         })
-        infoLogger.info(`Found event ${event} on DB.`)
+        infoLogger.info(`Found event ${event.eventName} on DB.`)
         return event
     } catch (err) {
-        errLogger.error(`Error getting event ${event} on DB. || ${err}`)
+        errLogger.error(`Error getting event ${eventCode} on DB. || ${err}`)
     }
 }
 
@@ -32,7 +32,7 @@ export const createEvent = async (eventCode, eventName, eventDate, eventLocation
                 userId: eventManager
             }
         })
-        infoLogger.info(`Created event ${event} on DB.`)
+        infoLogger.info(`Created event ${event.eventName} on DB.`)
         return event
     } catch (err) {
         errLogger.error(`Error creating event ${eventName} on DB. || ${err}`)

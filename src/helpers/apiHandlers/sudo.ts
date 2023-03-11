@@ -10,7 +10,6 @@ const STR = process.env.STR
 
 const sudoAuth = (fn: any) => async (req: NextApiRequest, res: NextApiResponse) => {
     verify(req.cookies.auth, STR!, async (err, decoded: any) => {
-        console.log(typeof decoded, 'decoded here');
         if (!err && decoded) {
             if (decoded.role !== 'default') {
                 infoLogger.info(`Accessed route as admin! || ${req.cookies.auth}`)

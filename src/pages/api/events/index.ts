@@ -20,7 +20,6 @@ export default auth(defaultHandler.get(async (req, res) => {
     const { eventCode, eventName, eventDate, eventLocation, eventManager } = req.body
 
     const exists = await getEvent(eventCode)
-    console.log(eventManager);
 
     if (exists) {
         res.status(401).send({
