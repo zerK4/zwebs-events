@@ -24,7 +24,7 @@ export default defaultHandler.post(async (req, res) => {
     if (existsEvent && !existsGuest) {
         const guest = await createGuest(event, firstname, lastname, email, phone, location, vegan, accomodation, kids, token)
 
-        infoLogger.info(`Guest ${name} with email ${email} created successfully!`)
+        infoLogger.info(`Guest ${firstname + " " + lastname} with email ${email} created successfully!`)
         const document = {
             userEmail: eventManager.email,
             firstname: eventManager.profile.firstName,

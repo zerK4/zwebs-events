@@ -5,6 +5,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import React, {useState, useEffect} from 'react'
+import Header from '../Components/Header/Header.component';
 import { MainPageConnected } from '../Components/MainPageConnected/MainPageConnected.component';
 import RegisterLoginComponent from '../Components/RegisterLoginProposal/RegisterLogin.component';
 import { useAuthStore } from '../store/authStore';

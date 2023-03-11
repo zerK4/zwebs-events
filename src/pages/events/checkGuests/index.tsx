@@ -2,24 +2,9 @@ import axios from "axios";
 import Head from "next/head";
 import Link from "next/link";
 import React, { useState } from "react";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import { ApiResponse } from '../../../utils/Interfaces/apiInterfaces' 
 
-interface ApiResponse {
-    message: string;
-    data:  {
-        id: number;
-        firstName: string;
-        lastName: string;
-        email: string;
-        phoneNumber: string;
-        location: string;
-        vegan: boolean;
-        accomodation: boolean;
-        kids: boolean;
-        eventId: string;
-        token: string;
-    },
-    found: boolean;
-  }
 
 export const CheckGuests = () => {
     const [email, setEmail] = useState('');
@@ -75,7 +60,8 @@ export const CheckGuests = () => {
             <Head>
                 <title>Find if you are participating!</title>
             </Head>
-            <div className="bg-neutral-800 p-10 w-full md:w-[50%]">
+            <div className="bg-neutral-800 p-10 w-full md:w-[50%] relative shadow-md shadow-black">
+                <Link href="/"><button className="absolute -top-8 left-0 flex items-center gap-2 text-sm tex-gray-400 hover:text-white"><AiOutlineArrowLeft />Back home</button></Link>
                 {
                     hideSearch ? (
                         !apiResponse.found ? (

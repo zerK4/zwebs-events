@@ -5,22 +5,8 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import prisma from "../../helpers/prismaFunctions/prisma";
+import { Guest } from "../../utils/Interfaces/guestInterfaces";
 
-interface Guest {
-    guest: {
-        id: number;
-        firstName: string;
-        lastName: string;
-        email: string;
-        phoneNumber: string;
-        location: string;
-        vegan: boolean;
-        accomodation: boolean;
-        kids: boolean;
-        eventId: string;
-    }
-  }
-  
 const ModifyProfile = (props: Guest) => {
     const { guest, guest: { firstName } } = props;
     const [guestProfile, setGuestProfile] = useState({

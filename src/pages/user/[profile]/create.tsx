@@ -90,7 +90,6 @@ export default CreateProfile;
 
 export async  function getServerSideProps(ctx: NextPageContext){
     const { res: { writeHead: redirect, end }, query: { profile } } = ctx;
-    console.log(profile);
     const user = await prisma.user.findUnique({
         where: {
             confirmationToken: profile as string
