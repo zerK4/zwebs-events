@@ -53,7 +53,6 @@ model Guest {
   vegan        Boolean
   accomodation Boolean
   kids         Boolean
-  transport    Boolean
 }
 
 model Kid {
