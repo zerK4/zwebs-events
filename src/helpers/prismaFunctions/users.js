@@ -1,12 +1,13 @@
 /**
  * @author Sebastian Pavel
+ * @date February 2023
  * ? Prisma users handler
  */
 
 import prisma from "./prisma";
 import { errLogger, infoLogger } from "../../utils/logger";
 
-export const createUser = async (username, email, password, token, role) => {
+export const createUser = async (username, email, password, token, role, eventCode) => {
     try {
         const user = await prisma.user.create({
             data: {
@@ -16,6 +17,7 @@ export const createUser = async (username, email, password, token, role) => {
                 verified: false,
                 confirmationToken: token,
                 role: role,
+                eventCode: eventCode
             }
         })
         infoLogger.info(`User email: ${email}, username: ${username} created successfully.`)
@@ -33,7 +35,8 @@ export const getOne = async (email) => {
                 email: email
             }, 
             include: {
-                profile: true
+                profile: true,
+                managingEvents: true
             }
         })
         infoLogger.info(`Requested ${email} from DB.`)
@@ -47,7 +50,8 @@ export const getAll = async () => {
     try {
         const data = await prisma.user.findMany({
             include: {
-                profile: true
+                profile: true,
+                managingEvents: true
             }
         })
         infoLogger.info('Requested all users from DB')
