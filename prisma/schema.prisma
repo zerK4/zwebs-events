@@ -46,15 +46,16 @@ model Event {
 }
 
 model Guest {
-  id           Int     @id @default(autoincrement())
-  firstName    String
-  lastName     String
-  email        String
-  phoneNumber  String
-  location     String
-  vegan        Boolean
-  accomodation Boolean
-  kids         Boolean
+  id            Int     @id @default(autoincrement())
+  participateTo String
+  firstName     String
+  lastName      String
+  email         String
+  phoneNumber   String
+  location      String
+  vegan         Boolean
+  accomodation  Boolean
+  kids          Boolean
 }
 
 model Kid {
