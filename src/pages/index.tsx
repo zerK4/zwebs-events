@@ -5,6 +5,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import React, {useState, useEffect} from 'react'
+import RegisterLoginComponent from '../Components/RegisterLoginProposal/RegisterLogin.component';
 import { useAuthStore } from '../store/authStore';
 
 type User = {
@@ -42,19 +43,17 @@ const logout = async () => {
 }
 
 return (
-<div className="p-10">
+<div className="p-2 flex items-center  justify-center min-h-screen">
   {
     !user?.profile?.firstName && user && connected ? (
       <div className='flex items-center gap-4'> 
         <p>You do not have a profile created, would you like to do it?</p>
         <Link href={`/user/${user?.confirmationToken}/create`}><button className='bg-lime-400 p-2 rounded-md px-6 hover:shadow ease-in-out duration-300'>Yup</button></Link>
       </div>
-      ) : <div>
-        Hello {user?.profile?.firstName}
-      </div>
+      ) : null
   }
 {
-  !connected ? <Link href="/auth/login"><button className='p-4 bg-neutral-800 rounded-md m-4 text-white'>Login</button></Link> : <button onClick={() => {logout(), setConnected(false)}} className='p-4 bg-neutral-800 rounded-md m-4 text-white'>Logout</button>
+  !connected ? <RegisterLoginComponent /> : <button onClick={() => {logout(), setConnected(false)}} className='p-4 bg-neutral-800 rounded-md m-4 text-white'>Logout</button>
 }
 
 </div>
@@ -74,3 +73,5 @@ export async function getServerSideProps(ctx: any) {
     }
   }
 }
+
+{/* <Link href="/auth/login"><button className='p-4 bg-neutral-800 rounded-md m-4 text-white'>Login</button></Link> */}
