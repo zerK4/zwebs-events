@@ -1,6 +1,6 @@
-import { createLogger, format, transports } from "winston";
+import { createLogger, format } from "winston";
 import prisma from "../../helpers/prismaFunctions/prisma";
-import { PrismaWinstonTransporter } from "./prismaWinston";
+import { PrismaTransporter } from "./prismaWinston";
 
 export const errLogger = createLogger({
     level: 'error',
@@ -10,7 +10,7 @@ export const errLogger = createLogger({
     ),
     defaultMeta: { service: 'zWebs' },
     transports: [
-        new PrismaWinstonTransporter({
+        new PrismaTransporter({
         level: "http",
         prisma,
         tableName: 'errorLog'
@@ -26,10 +26,10 @@ export const infoLogger = createLogger({
     ),
     defaultMeta: { service: 'zWebs' },
     transports: [
-        new PrismaWinstonTransporter({
+        new PrismaTransporter({
             level: "http",
             prisma,
             tableName: 'infoLog'
-            }),
+        }),
     ],
 })
