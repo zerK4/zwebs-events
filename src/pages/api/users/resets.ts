@@ -22,9 +22,9 @@ export default defaultHandler.post(async (req, res) => {
             button: 'Change password'
         })
         infoLogger.info(`Email sent to ${email} with a link to reset the password!`)
-        res.status(200).send({
-            message: `Email sent to reset the password to ${email}`
-        })
+        return res.status(200).send({
+                message: `Email sent to reset the password to ${email}`
+            })
     }
 }).put(async (req, res) => {
     const { motif, email, password } = req.body
@@ -41,15 +41,15 @@ export default defaultHandler.post(async (req, res) => {
                         }
                     })
                     infoLogger.info(`Password changed successfully for ${email}`)
-                    res.status(200).send({
-                        message: `Password changed successfully for ${email}`
-                    })
+                    return res.status(200).send({
+                            message: `Password changed successfully for ${email}`
+                        })
                 } else {
                     errLogger.error(`Got an error changing the password || ${err}`)
                     console.error(err)
-                    res.status(500).send({
-                        message: `Got an error trying to change the password || ${err}`
-                    })
+                    return res.status(500).send({
+                            message: `Got an error trying to change the password || ${err}`
+                        })
                 }
             })
     }

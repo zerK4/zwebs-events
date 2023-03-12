@@ -22,18 +22,18 @@ export default defaultHandler.post(async (req, res) => {
                 age: age
             })
             infoLogger.info(`Send profile ${firstname + " " + lastname} to frot end after it was created!`)
-            res.status(200).send({
-                profile: profile,
-                message: `Profile for ${firstname + " " + lastname} created successfull!`
-            })
+            return res.status(200).send({
+                    profile: profile,
+                    message: `Profile for ${firstname + " " + lastname} created successfull!`
+                })
         } catch (err) {
             errLogger.error(`Error found at creating profile api route || ${err}`)
             throw new Error(`Error found at creating profile api route || ${err}`)
         }
     } else {
         errLogger.error(`No info was provided to create the user profile!`)
-        res.status(401).send({
-            message: `No info was provided to create the profile!`
-        })
+        return res.status(401).send({
+                message: `No info was provided to create the profile!`
+            })
     }
 })

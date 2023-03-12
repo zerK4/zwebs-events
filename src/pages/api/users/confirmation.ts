@@ -22,14 +22,14 @@ export default defaultHandler.post(async (req, res) => {
             }
         })
         infoLogger.info(`${user.email} was successfully verified!`)
-        res.status(200).send({
-            message: `${user.email} verified successfully!`,
-            confirmed: user.verified
-        })
+        return res.status(200).send({
+                message: `${user.email} verified successfully!`,
+                confirmed: user.verified
+            })
     } catch (err) {
         errLogger.error(`Got an error updating the user. || ${user.email} || error: ${err}`)
-        res.status(500).send({
-            message: `Got an error updating the user! || ${err}`
-        })
+        return res.status(500).send({
+                message: `Got an error updating the user! || ${err}`
+            })
     }
 })

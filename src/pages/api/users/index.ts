@@ -11,7 +11,7 @@ export default auth(defaultHandler.get(async (req, res) => {
     const { action } = req.query
     const users = await getAll();
 
-    res.status(200).send({
-        data: users
-    })
+    return res.status(200).send({
+            data: users
+        })
 }))

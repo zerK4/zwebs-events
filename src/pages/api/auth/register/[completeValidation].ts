@@ -26,19 +26,18 @@ export default defaultHandler.post(async (req, res) => {
                 button: 'Confirm email'
             })
             infoLogger.info(`Email sent to ${email} asking to confirm the account.`)
-            res.status(200).send({
-                message: `Email successfully sent to ${email}`
-            })
+            return res.status(200).send({
+                    message: `Email successfully sent to ${email}`
+                })
         } else {
             errLogger.error(`${email} is already validated!`)
             throw new Error(`${email} is already validated!`)
         }
     } else {
         errLogger.error('No email was provided!')
-        res.status(401).send({
-            message: 'No email was provided!'
-        })
-        throw new Error(`no email was provided!`)
+        return res.status(401).send({
+                message: 'No email was provided!'
+            })
     }
 }).get(async (req, res) => {
     const { completeValidation } = req.query
@@ -52,14 +51,13 @@ export default defaultHandler.post(async (req, res) => {
             }
         })
         infoLogger.info(`${user.email} validated successfully!`)
-        res.status(200).send({
-            message: `${user.email} confirmed successfully!`
-        })
+        return res.status(200).send({
+                message: `${user.email} confirmed successfully!`
+            })
     } catch (err) {
         errLogger.error('Nothing to validate!')
-        res.status(404).send({
-            message: "Nothing to validate!"
-        })
-        throw new Error('Nothing to validate!')
+        return res.status(404).send({
+                message: "Nothing to validate!"
+            })
     }
 })

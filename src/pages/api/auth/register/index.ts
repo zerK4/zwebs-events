@@ -19,9 +19,9 @@ export default defaultHandler.post(async (req, res) => {
     let confirmationToken: string;
     const user = await getOne(email)
     if (user) {
-        res.status(401).send({
-            message: `This email is already registered!`
-        })
+        return res.status(401).send({
+                message: `This email is already registered!`
+            })
     }
 
     if (email && password && username) {
@@ -32,14 +32,10 @@ export default defaultHandler.post(async (req, res) => {
             const user = await createUser(username, email, hash, confirmationToken, role)
             if (err) {
                 errLogger.error(`Something broke at hashing password, message: ${err}`)
-                res.status(500).send({
-                    message: "Something wrong happened!"
-                })
+                return res.status(500).send({
+                        message: "Something wrong happened!"
+                    })
             }
-            res.status(200).send({
-                user: user,
-                message: `We have sent a confirmation email to ${email}!`
-            })
             verifyEmail({
                 userEmail: email,
                 url: `${url}user/confirmation/${confirmationToken}`,
@@ -47,11 +43,15 @@ export default defaultHandler.post(async (req, res) => {
                 message: "Hey, we need you to confirm your email address in order to let you in our system!",
                 button: 'Confirm email'
             })
+            return res.status(200).send({
+                    user: user,
+                    message: `We have sent a confirmation email to ${email}!`
+                })
         })
     } else {
-        res.send({
-            message: 'nothing to create!'
-        })
         errLogger.error('No data added to the post request!')
+        return res.send({
+                message: 'nothing to create!'
+            })
     }
 })

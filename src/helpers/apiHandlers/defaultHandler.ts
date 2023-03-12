@@ -9,11 +9,11 @@ import { errLogger } from "../../utils/logger"
 const defaultHandler = nextConnect<NextApiRequest, NextApiResponse>({
     onError(error, req, res) {
         errLogger.error(`Got error on defaultHandler, //: ${error}`)
-        res.status(501).json({ error: `Something happened! ${error}` })
+        return res.status(501).json({ error: `Something happened! ${error}` })
     },
     onNoMatch(req, res) {
         errLogger.error(`No match in defaultHander, //: ${req.method} `)
-        res.status(501).json({ error: `Something happened! ${req.method}` })
+        return res.status(501).json({ error: `Something happened! ${req.method}` })
     }
 })
 

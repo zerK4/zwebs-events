@@ -15,9 +15,9 @@ const sudoAuth = (fn: any) => async (req: NextApiRequest, res: NextApiResponse) 
                 infoLogger.info(`Accessed route as admin! || ${req.cookies.auth}`)
                 return await fn(req, res);
             } else {
-                res.status(403).send({
-                    message: 'You are not authorised to access this route!'
-                })
+               return res.status(403).send({
+                        message: 'You are not authorised to access this route!'
+                    })
             }
         } else {
             errLogger.error(`User not authenticated to access this page! || ${err}, `)

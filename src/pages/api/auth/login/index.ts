@@ -32,10 +32,10 @@ export default defaultHandler.post(async (req, res) => {
                 }, key!, (err: any, token: any) => {
                     if (err && !token) {
                         errLogger.error(`Got an error on creating the jwt token, ${err}, email: ${email}`)
-                        res.status(500).send({
-                            message: "Cannot create token to authenticate!",
-                            error: err
-                        })
+                        return res.status(500).send({
+                                message: "Cannot create token to authenticate!",
+                                error: err
+                            })
                     } else {
                         infoLogger.info(`Logged in, ${email}, cookie set, ${token}`)
                         res.setHeader(
@@ -48,31 +48,31 @@ export default defaultHandler.post(async (req, res) => {
                                 path: "/",
                             })
                         );
-                        res.status(200).send({
-                            ok: true,
-                            message: `${user.email} successfully authenticated!`,
-                            user: user,
-                        })
+                        return res.status(200).send({
+                                ok: true,
+                                message: `${user.email} successfully authenticated!`,
+                                user: user,
+                            })
                     }
                 })
             } else {
                 errLogger.error(`Got an error at comparing passwords, incorrect password, ${err}, ${email}`)
-                res.status(404).send({
-                    message: 'Incorrect password!'
-                })
+                return res.status(404).send({
+                        message: 'Incorrect password!'
+                    })
             }
         })
     } if (user && !user.verified) {
         errLogger.error(`${email} is not yet validated!`)
-        res.status(401).send({
-            confirmed: false,
-            message: `${email} is not yet validated, please do it!`
-        })
+        return res.status(401).send({
+                confirmed: false,
+                message: `${email} is not yet validated, please do it!`
+            })
     } if (!user) {
         errLogger.error(`${email} does not exist!`)
-        res.status(404).send({
-            confirmed: false,
-            message: `${email} does not exist, please create an account if you want to access the services!`
-        })
+        return res.status(404).send({
+                confirmed: false,
+                message: `${email} does not exist, please create an account if you want to access the services!`
+            })
     }
 })
