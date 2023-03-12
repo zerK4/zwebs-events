@@ -1,48 +1,35 @@
 import { createLogger, format, transports } from "winston";
-import createFolderIfNotExists from '../logsFolderCheck'
-
-const myFormat = format.printf(({ level, message, label, timestamp }) => {
-    return `${timestamp} [${label}] ${level}: ${message}`;
-  });
-  
-const logFolder = 'logs'
+import prisma from "../../helpers/prismaFunctions/prisma";
+import { PrismaWinstonTransporter } from "./prismaWinston";
 
 export const errLogger = createLogger({
     level: 'error',
     format: format.combine(
-        format.label({ label: 'Right now!'}),
         format.timestamp(),
-        myFormat,
+        format.json(),
     ),
+    defaultMeta: { service: 'zWebs' },
     transports: [
-        new transports.Console(),
-        new transports.File({
-            filename: `${logFolder}/allLogs.log`,
-            level: 'error'
+        new PrismaWinstonTransporter({
+        level: "http",
+        prisma,
+        tableName: 'errorLog'
         }),
-        new transports.File({
-            filename: `${logFolder}/errorLogs.log`,
-            level: 'error'
-        })
     ],
 })
 
 export const infoLogger = createLogger({
     level: 'info',
     format: format.combine(
-        format.label({ label: 'Right now!'}),
         format.timestamp(),
-        myFormat,
+        format.json(),
     ),
+    defaultMeta: { service: 'zWebs' },
     transports: [
-        new transports.Console(),
-        new transports.File({
-            filename: `${logFolder}/allLogs.log`,
-            level: 'info'
-        }),
-        new transports.File({
-            filename: `${logFolder}/innfoLogs.log`,
-            level: 'info'
-        })
+        new PrismaWinstonTransporter({
+            level: "http",
+            prisma,
+            tableName: 'infoLog'
+            }),
     ],
 })
