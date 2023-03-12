@@ -1,5 +1,6 @@
 import type { PrismaClient } from "@prisma/client";
 import Transport, { type TransportStreamOptions } from "winston-transport";
+import prisma from "../../helpers/prismaFunctions/prisma";
 
 export interface PrismaTransporterOptions extends TransportStreamOptions {
   prisma: PrismaClient;
@@ -60,7 +61,7 @@ export class PrismaWinstonTransporter extends Transport {
         callback = () => {};
       }
 
-      this.prisma[this.tableName]
+      prisma[this.tableName]
         .create({
           data: {
             level,
