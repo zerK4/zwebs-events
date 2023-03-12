@@ -19,6 +19,7 @@ export default defaultHandler.post(async (req, res) => {
     let confirmationToken: string;
     const user = await getOne(email)
     if (user) {
+        errLogger.error(`User with email ${email} already exists!`)
         return res.status(401).send({
                 message: `This email is already registered!`
             })
