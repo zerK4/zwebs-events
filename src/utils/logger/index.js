@@ -5,7 +5,7 @@ const myFormat = format.printf(({ level, message, label, timestamp }) => {
     return `${timestamp} [${label}] ${level}: ${message}`;
   });
   
-const logFolder = 'src/logs'
+const logFolder = 'logs'
 
 export const errLogger = createLogger({
     level: 'error',
